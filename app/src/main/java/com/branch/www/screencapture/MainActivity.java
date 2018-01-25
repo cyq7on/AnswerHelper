@@ -6,6 +6,13 @@ import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
 
 public class MainActivity extends FragmentActivity {
 
@@ -47,10 +54,43 @@ public class MainActivity extends FragmentActivity {
         if (resultCode == RESULT_OK && data != null) {
           FloatWindowsService.setResultData(data);
           startService(new Intent(getApplicationContext(), FloatWindowsService.class));
+          initAccessTokenWithAkSk();
         }
         break;
     }
 
+  }
+
+  private void initAccessTokenWithAkSk() {
+    OCR.getInstance().initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+      @Override
+      public void onResult(AccessToken result) {
+        String token = result.getAccessToken();
+        Log.d("test","验证成功");
+        finish();
+      }
+
+      @Override
+      public void onError(OCRError error) {
+        error.printStackTrace();
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            Toast.makeText(getApplicationContext(),"AK，SK方式获取token失败",Toast.LENGTH_SHORT).show();
+          }
+        });
+
+        Log.d("test",error.getMessage());
+        finish();
+      }
+    }, getApplicationContext(), "B8OMZNpahuc1EyraCx0yI8TS", "lftpgyLRdSspzWIy8ajVxiwjFy0yICPI");
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    // 释放内存资源
+    //OCR.getInstance().release();
   }
 
 }

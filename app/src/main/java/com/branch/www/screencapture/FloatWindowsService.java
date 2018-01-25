@@ -28,6 +28,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.GeneralParams;
+import com.baidu.ocr.sdk.model.GeneralResult;
+import com.baidu.ocr.sdk.model.WordSimple;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -110,9 +118,9 @@ public class FloatWindowsService extends Service {
     // 设置Window flag
     mLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-    mLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-    mLayoutParams.x = mScreenWidth;
-    mLayoutParams.y = 100;
+    mLayoutParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+    mLayoutParams.x = 200;
+    mLayoutParams.y = 400;
     mLayoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
     mLayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
@@ -284,7 +292,7 @@ public class FloatWindowsService extends Service {
           }
           FileOutputStream out = new FileOutputStream(fileImage);
           if (out != null) {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
             Intent media = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -302,21 +310,61 @@ public class FloatWindowsService extends Service {
       }
 
       if (fileImage != null) {
+          orc(fileImage);
         return bitmap;
       }
+      Log.d("test","file is null");
       return null;
     }
+
+      private void orc(File file){
+          // 通用文字识别参数设置
+          GeneralParams param = new GeneralParams();
+          param.setDetectDirection(true);
+          param.setVertexesLocation(true);
+          param.setRecognizeGranularity(GeneralParams.GRANULARITY_SMALL);
+          param.setImageFile(file);
+
+          // 调用通用文字识别服务
+          OCR.getInstance().recognizeAccurateBasic(param, new OnResultListener<GeneralResult>() {
+              @Override
+              public void onResult(GeneralResult result) {
+                  StringBuilder sb = new StringBuilder();
+                  // 调用成功，返回GeneralResult对象
+                  for (WordSimple wordSimple : result.getWordList()) {
+                      // wordSimple不包含位置信息
+                      sb.append(wordSimple.getWords());
+                      sb.append("\n");
+                  }
+                  // json格式返回字符串
+                  Log.d("word",sb.toString());
+                  Log.d("result",result.getJsonRes());
+              }
+
+              @Override
+              public void onError(OCRError error) {
+                  // 调用失败，返回OCRError对象
+                  new Handler().post(new Runnable() {
+                      @Override
+                      public void run() {
+                          Toast.makeText(getApplicationContext(),"orc接口调用失败",Toast.LENGTH_SHORT).show();
+                      }
+                  });
+                  Log.d("test",error.getMessage());
+              }
+          });
+      }
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
       super.onPostExecute(bitmap);
       //预览图片
-      if (bitmap != null) {
+      /*if (bitmap != null) {
 
         ((ScreenCaptureApplication) getApplication()).setmScreenCaptureBitmap(bitmap);
         Log.e("ryze", "获取图片成功");
         startActivity(PreviewPictureActivity.newIntent(getApplicationContext()));
-      }
+      }*/
 
       mFloatView.setVisibility(View.VISIBLE);
 

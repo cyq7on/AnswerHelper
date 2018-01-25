@@ -52,7 +52,8 @@ public class FileUtil {
 
   public static String getScreenShotsName(Context context) {
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+//    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
     String date = simpleDateFormat.format(new Date());
 
@@ -60,7 +61,7 @@ public class FileUtil {
     stringBuffer.append(SCREENSHOT_NAME);
     stringBuffer.append("_");
     stringBuffer.append(date);
-    stringBuffer.append(".png");
+    stringBuffer.append(".JPEG");
 
     return stringBuffer.toString();
 

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScreenCapture.iml" filepath="$PROJECT_DIR$/ScreenCapture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AnswerHelper.iml" filepath="$PROJECT_DIR$/AnswerHelper.iml" />
+      <module fileurl="file://E:\demo\Android\ScreenCapture\ScreenCapture.iml" filepath="E:\demo\Android\ScreenCapture\ScreenCapture.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\demo\Android\ScreenCapture\app\app.iml" filepath="E:\demo\Android\ScreenCapture\app\app.iml" />
     </modules>
   </component>
 </project>
