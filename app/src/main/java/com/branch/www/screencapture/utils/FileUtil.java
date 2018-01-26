@@ -1,4 +1,4 @@
-package com.branch.www.screencapture;
+package com.branch.www.screencapture.utils;
 
 import android.content.Context;
 import android.os.Environment;

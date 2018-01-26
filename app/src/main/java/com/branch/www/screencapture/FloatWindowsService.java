@@ -36,6 +36,7 @@ import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
+import com.branch.www.screencapture.utils.FileUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
