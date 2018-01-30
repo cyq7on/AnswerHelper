@@ -45,6 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.util.List;
 
 /**
  * Created by branch on 2016-5-25.
@@ -335,7 +336,14 @@ public class FloatWindowsService extends Service {
                 public void onResult(GeneralResult result) {
                     StringBuilder sb = new StringBuilder();
                     // 调用成功，返回GeneralResult对象
-                    for (WordSimple wordSimple : result.getWordList()) {
+                    // 剔除问题之前的脏数据
+                    List<? extends WordSimple> wordList = result.getWordList();
+                    int i = 0;
+                    for (; wordList.get(i).getWords().contains("?")
+                            && i < wordList.size(); i++)
+                        ;
+                    List<? extends WordSimple> subList = wordList.subList(i + 2, i + 6);
+                    for (WordSimple wordSimple : subList) {
                         // wordSimple不包含位置信息
                         sb.append(wordSimple.getWords());
                         sb.append("\n");

@@ -33,7 +33,7 @@ public class PreviewPictureActivity extends FragmentActivity implements GlobalSc
 
     GlobalScreenshot screenshot = new GlobalScreenshot(getApplicationContext());
 
-    Bitmap bitmap = ((ScreenCaptureApplication) getApplication()).getmScreenCaptureBitmap();
+    Bitmap bitmap = ((MyApplication) getApplication()).getmScreenCaptureBitmap();
 
 
     Log.e("ryze", "预览图片");

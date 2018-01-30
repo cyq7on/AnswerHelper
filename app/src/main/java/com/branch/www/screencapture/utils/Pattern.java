@@ -1,7 +1,9 @@
 package com.branch.www.screencapture.utils;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import com.branch.www.screencapture.MyApplication;
 import com.branch.www.screencapture.search.BaiDuSearch;
 import com.branch.www.screencapture.search.Search;
 
@@ -25,7 +27,8 @@ public class Pattern {
         long endTime;
         long startTime = System.currentTimeMillis();
         if (questionAndAnswers == null || !questionAndAnswers.contains(QUESTION_FLAG)) {
-            Log.d("test","问题识别失败，输入回车继续运行");
+            Log.d("test","问题识别失败");
+            Toast.makeText(MyApplication.getContext(),"问题识别失败",Toast.LENGTH_SHORT).show();
             return;
         }
         //获取问题和答案
