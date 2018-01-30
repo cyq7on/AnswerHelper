@@ -130,7 +130,7 @@ public class FloatWindowsService extends Service {
 
 
         mFloatView = new ImageView(getApplicationContext());
-        mFloatView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_imagetool_crop));
+        mFloatView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ava_edit));
         mWindowManager.addView(mFloatView, mLayoutParams);
 
 
