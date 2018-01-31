@@ -1,4 +1,4 @@
-package com.branch.www.screencapture;
+package com.cyq7on.answerhelper;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -28,7 +28,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
@@ -36,8 +35,9 @@ import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
-import com.branch.www.screencapture.utils.FileUtil;
-import com.branch.www.screencapture.utils.Pattern;
+import com.cyq7on.answerhelper.utils.FileUtil;
+import com.cyq7on.answerhelper.utils.Pattern;
+import com.cyq7on.answerhelper.utils.ToastUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -368,7 +368,7 @@ public class FloatWindowsService extends Service {
                     new Handler().post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "orc接口调用失败", Toast.LENGTH_SHORT).show();
+                            ToastUtil.showShort(getApplicationContext(),"orc接口调用失败");
                         }
                     });
                     long endTime = System.currentTimeMillis();

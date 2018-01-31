@@ -1,11 +1,10 @@
-package com.branch.www.screencapture.utils;
+package com.cyq7on.answerhelper.utils;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.branch.www.screencapture.MyApplication;
-import com.branch.www.screencapture.search.BaiDuSearch;
-import com.branch.www.screencapture.search.Search;
+import com.cyq7on.answerhelper.MyApplication;
+import com.cyq7on.answerhelper.search.BaiDuSearch;
+import com.cyq7on.answerhelper.search.Search;
 
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ExecutionException;
@@ -28,7 +27,7 @@ public class Pattern {
         long startTime = System.currentTimeMillis();
         if (questionAndAnswers == null || !questionAndAnswers.contains(QUESTION_FLAG)) {
             Log.d("test","问题识别失败");
-            Toast.makeText(MyApplication.getContext(),"问题识别失败",Toast.LENGTH_SHORT).show();
+            ToastUtil.showShort(MyApplication.getContext(),"问题识别失败");
             return;
         }
         //获取问题和答案
@@ -37,9 +36,11 @@ public class Pattern {
         String question = information.getQuestion();
         String[] answers = information.getAns();
         if (question == null) {
+            ToastUtil.showShort(MyApplication.getContext(),"问题不存在");
             Log.d("test","问题不存在");
             return;
         } else if (answers.length < 1) {
+            ToastUtil.showShort(MyApplication.getContext(),"检测不到答案");
             Log.d("test","检测不到答案");
             return;
         }
@@ -93,6 +94,7 @@ public class Pattern {
             ans[i] = (float) countQA[i] / (float) (countQuestion * countAnswer[i]);
             maxIndex = (ans[i] > ans[maxIndex]) ? i : maxIndex;
         }
+        ToastUtil.showShort(MyApplication.getContext(),"推荐答案：" + answers[maxIndex]);
         //根据pmi值进行打印搜索结果
         int[] rank = Utils.rank(ans);
         for (int i : rank) {

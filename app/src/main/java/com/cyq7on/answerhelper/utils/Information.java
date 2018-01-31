@@ -1,4 +1,4 @@
-package com.branch.www.screencapture.utils;
+package com.cyq7on.answerhelper.utils;
 
 /**
  * Created by 618 on 2018/1/12.

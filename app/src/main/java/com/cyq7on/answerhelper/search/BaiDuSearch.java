@@ -1,4 +1,4 @@
-package com.branch.www.screencapture.search;
+package com.cyq7on.answerhelper.search;
 
 import java.io.BufferedReader;
 import java.io.IOException;

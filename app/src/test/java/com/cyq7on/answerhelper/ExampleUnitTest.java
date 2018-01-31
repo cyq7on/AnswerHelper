@@ -1,4 +1,4 @@
-package com.branch.www.screencapture;
+package com.cyq7on.answerhelper;
 
 import org.junit.Test;
 

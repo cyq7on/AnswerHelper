@@ -1,4 +1,4 @@
-package com.branch.www.screencapture;
+package com.cyq7on.answerhelper;
 
 /*
  * Copyright (C) 2011 The Android Open Source Project

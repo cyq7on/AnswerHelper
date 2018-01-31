@@ -1,4 +1,4 @@
-package com.branch.www.screencapture.utils;
+package com.cyq7on.answerhelper.utils;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package com.branch.www.screencapture;
+package com.cyq7on.answerhelper;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.AccessToken;
+import com.cyq7on.answerhelper.utils.ToastUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "AK，SK方式获取token失败", Toast.LENGTH_SHORT).show();
+                        isNeed = true;
+                        ToastUtil.showShort(getApplicationContext(),"AK，SK方式获取token失败");
                     }
                 });
 
